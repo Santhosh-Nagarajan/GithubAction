@@ -5,8 +5,8 @@ on:
     branches:
       - master
   
-  env:
-     DOCKER_BUILD_VERSION: ${{ github.run_number }}
+env:
+    DOCKER_BUILD_VERSION: ${{ github.run_number }}
 
 jobs:
   build-and-push:
@@ -20,7 +20,7 @@ jobs:
              docker version
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.run_number }} .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ DOCKER_BUILD_VERSION }} .
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/nginx:${{ github.run_number }}
